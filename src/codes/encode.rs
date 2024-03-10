@@ -13,8 +13,8 @@ pub struct RequestEncode {
 impl Encoder<Vec<u8>> for RequestEncode {
     type Error = std::io::Error;
     fn encode(&mut self, item: Vec<u8>, dst: &mut BytesMut) -> Result<(), Self::Error> {
-        // Don't send a string if it is longer than the other end will
-        // accept.
+        // 如果字符串大于8m，则不要发送，
+        // 接受。
         if item.len() > ByteCode::Max.size() {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::InvalidData,
@@ -22,8 +22,8 @@ impl Encoder<Vec<u8>> for RequestEncode {
             ));
         }
 
-        // Convert the length into a byte array.
-        // The cast to u32 cannot overflow due to the length check above.
+        // 将长度转换为字节数组。
+        // 由于上面的长度检查，转换为 u32 不会溢出。
         let len_slice = u32::to_le_bytes(item.len() as u32);
 
         // Reserve space in the buffer.
