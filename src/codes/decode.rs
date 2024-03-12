@@ -1,5 +1,7 @@
+use crate::codes::encode::ResponseEncode;
 use crate::codes::ByteCode;
-use crate::transfer::transfer::RequestTran;
+use crate::my_request::request_1::RequestMessage;
+use crate::my_response::response_1::ResponseMessage;
 use bytes::Buf;
 use protobuf::Message;
 use tokio::io::AsyncReadExt;
@@ -8,11 +10,11 @@ use tokio_util::codec::Decoder;
 
 pub struct ResponseDecode {
     pub stream: TcpStream,
-    pub transfer: Option<RequestTran>,
+    pub req_msg: Option<RequestMessage>,
 }
 
 impl Decoder for ResponseDecode {
-    type Item = RequestTran;
+    type Item = RequestMessage;
 
     type Error = std::io::Error;
 
@@ -50,13 +52,13 @@ impl Decoder for ResponseDecode {
         let data = src[4..4 + length].to_vec();
         src.advance(4 + length);
 
-        let request_tran = RequestTran::parse_from_bytes(&data).unwrap();
+        let request_tran = RequestMessage::parse_from_bytes(&data).unwrap();
         Ok(Some(request_tran))
     }
 }
 
 impl ResponseDecode {
-    pub async fn rece(&mut self) {
+    pub async fn rece(mut self) {
         let mut buf = bytes::BytesMut::new();
         match self.stream.read_buf(&mut buf).await {
             // socket closed
@@ -72,7 +74,7 @@ impl ResponseDecode {
                 if let Some(date) = date {
                     date
                 } else {
-                    RequestTran::new()
+                    RequestMessage::new()
                 }
             }
             Err(_) => {
@@ -80,5 +82,11 @@ impl ResponseDecode {
             }
         };
         println!("{:#?}", date);
+        let mut resp_msg = ResponseMessage::new();
+        resp_msg.code = 2;
+        resp_msg.message="success".to_string();
+        resp_msg.data = "OK".to_string();
+        let mut resp = ResponseEncode { resq_msg: resp_msg };
+        let _ = resp.send(self.stream).await;
     }
 }

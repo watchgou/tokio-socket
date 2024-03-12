@@ -1,0 +1,8 @@
+syntax = "proto3";
+package my_request;
+
+message RequestMessage {
+    string message = 1;
+    uint32 code = 2;
+}
+// protoc --rust_out=src/my_request proto/my_request.proto

@@ -1,0 +1,9 @@
+
+syntax = "proto3";
+package my_response;
+
+message ResponseMessage {
+    string message = 1;
+    uint32 code = 2;
+    string data = 3;
+}

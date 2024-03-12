@@ -19,35 +19,35 @@
 #![allow(unused_results)]
 #![allow(unused_mut)]
 
-//! Generated file from `proto/transfer.proto`
+//! Generated file from `proto/response_1.proto`
 
 /// Generated files are compatible only with the same version
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_4_0;
 
-// @@protoc_insertion_point(message:transfer.RequestTran)
+// @@protoc_insertion_point(message:MyResponse.ResponseMessage)
 #[derive(PartialEq,Clone,Default,Debug)]
-pub struct RequestTran {
+pub struct ResponseMessage {
     // message fields
-    // @@protoc_insertion_point(field:transfer.RequestTran.from)
-    pub from: ::std::string::String,
-    // @@protoc_insertion_point(field:transfer.RequestTran.to)
-    pub to: ::std::string::String,
-    // @@protoc_insertion_point(field:transfer.RequestTran.amount)
-    pub amount: u64,
+    // @@protoc_insertion_point(field:MyResponse.ResponseMessage.message)
+    pub message: ::std::string::String,
+    // @@protoc_insertion_point(field:MyResponse.ResponseMessage.code)
+    pub code: u32,
+    // @@protoc_insertion_point(field:MyResponse.ResponseMessage.data)
+    pub data: ::std::string::String,
     // special fields
-    // @@protoc_insertion_point(special_field:transfer.RequestTran.special_fields)
+    // @@protoc_insertion_point(special_field:MyResponse.ResponseMessage.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
-impl<'a> ::std::default::Default for &'a RequestTran {
-    fn default() -> &'a RequestTran {
-        <RequestTran as ::protobuf::Message>::default_instance()
+impl<'a> ::std::default::Default for &'a ResponseMessage {
+    fn default() -> &'a ResponseMessage {
+        <ResponseMessage as ::protobuf::Message>::default_instance()
     }
 }
 
-impl RequestTran {
-    pub fn new() -> RequestTran {
+impl ResponseMessage {
+    pub fn new() -> ResponseMessage {
         ::std::default::Default::default()
     }
 
@@ -55,30 +55,30 @@ impl RequestTran {
         let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "from",
-            |m: &RequestTran| { &m.from },
-            |m: &mut RequestTran| { &mut m.from },
+            "message",
+            |m: &ResponseMessage| { &m.message },
+            |m: &mut ResponseMessage| { &mut m.message },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "to",
-            |m: &RequestTran| { &m.to },
-            |m: &mut RequestTran| { &mut m.to },
+            "code",
+            |m: &ResponseMessage| { &m.code },
+            |m: &mut ResponseMessage| { &mut m.code },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "amount",
-            |m: &RequestTran| { &m.amount },
-            |m: &mut RequestTran| { &mut m.amount },
+            "data",
+            |m: &ResponseMessage| { &m.data },
+            |m: &mut ResponseMessage| { &mut m.data },
         ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<RequestTran>(
-            "RequestTran",
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ResponseMessage>(
+            "ResponseMessage",
             fields,
             oneofs,
         )
     }
 }
 
-impl ::protobuf::Message for RequestTran {
-    const NAME: &'static str = "RequestTran";
+impl ::protobuf::Message for ResponseMessage {
+    const NAME: &'static str = "ResponseMessage";
 
     fn is_initialized(&self) -> bool {
         true
@@ -88,13 +88,13 @@ impl ::protobuf::Message for RequestTran {
         while let Some(tag) = is.read_raw_tag_or_eof()? {
             match tag {
                 10 => {
-                    self.from = is.read_string()?;
+                    self.message = is.read_string()?;
                 },
-                18 => {
-                    self.to = is.read_string()?;
+                16 => {
+                    self.code = is.read_uint32()?;
                 },
-                24 => {
-                    self.amount = is.read_uint64()?;
+                26 => {
+                    self.data = is.read_string()?;
                 },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -108,14 +108,14 @@ impl ::protobuf::Message for RequestTran {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if !self.from.is_empty() {
-            my_size += ::protobuf::rt::string_size(1, &self.from);
+        if !self.message.is_empty() {
+            my_size += ::protobuf::rt::string_size(1, &self.message);
         }
-        if !self.to.is_empty() {
-            my_size += ::protobuf::rt::string_size(2, &self.to);
+        if self.code != 0 {
+            my_size += ::protobuf::rt::uint32_size(2, self.code);
         }
-        if self.amount != 0 {
-            my_size += ::protobuf::rt::uint64_size(3, self.amount);
+        if !self.data.is_empty() {
+            my_size += ::protobuf::rt::string_size(3, &self.data);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -123,14 +123,14 @@ impl ::protobuf::Message for RequestTran {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if !self.from.is_empty() {
-            os.write_string(1, &self.from)?;
+        if !self.message.is_empty() {
+            os.write_string(1, &self.message)?;
         }
-        if !self.to.is_empty() {
-            os.write_string(2, &self.to)?;
+        if self.code != 0 {
+            os.write_uint32(2, self.code)?;
         }
-        if self.amount != 0 {
-            os.write_uint64(3, self.amount)?;
+        if !self.data.is_empty() {
+            os.write_string(3, &self.data)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -144,60 +144,60 @@ impl ::protobuf::Message for RequestTran {
         &mut self.special_fields
     }
 
-    fn new() -> RequestTran {
-        RequestTran::new()
+    fn new() -> ResponseMessage {
+        ResponseMessage::new()
     }
 
     fn clear(&mut self) {
-        self.from.clear();
-        self.to.clear();
-        self.amount = 0;
+        self.message.clear();
+        self.code = 0;
+        self.data.clear();
         self.special_fields.clear();
     }
 
-    fn default_instance() -> &'static RequestTran {
-        static instance: RequestTran = RequestTran {
-            from: ::std::string::String::new(),
-            to: ::std::string::String::new(),
-            amount: 0,
+    fn default_instance() -> &'static ResponseMessage {
+        static instance: ResponseMessage = ResponseMessage {
+            message: ::std::string::String::new(),
+            code: 0,
+            data: ::std::string::String::new(),
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-impl ::protobuf::MessageFull for RequestTran {
+impl ::protobuf::MessageFull for ResponseMessage {
     fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
         static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("RequestTran").unwrap()).clone()
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ResponseMessage").unwrap()).clone()
     }
 }
 
-impl ::std::fmt::Display for RequestTran {
+impl ::std::fmt::Display for ResponseMessage {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         ::protobuf::text_format::fmt(self, f)
     }
 }
 
-impl ::protobuf::reflect::ProtobufValue for RequestTran {
+impl ::protobuf::reflect::ProtobufValue for ResponseMessage {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x14proto/transfer.proto\x12\x08transfer\"I\n\x0bRequestTran\x12\x12\n\
-    \x04from\x18\x01\x20\x01(\tR\x04from\x12\x0e\n\x02to\x18\x02\x20\x01(\tR\
-    \x02to\x12\x16\n\x06amount\x18\x03\x20\x01(\x04R\x06amountJ\xd9\x01\n\
-    \x06\x12\x04\0\0\x08\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\
-    \x12\x03\x01\0\x11\n\n\n\x02\x04\0\x12\x04\x04\0\x08\x01\n\n\n\x03\x04\0\
-    \x01\x12\x03\x04\x08\x13\n\x0b\n\x04\x04\0\x02\0\x12\x03\x05\x04\x14\n\
-    \x0c\n\x05\x04\0\x02\0\x05\x12\x03\x05\x04\n\n\x0c\n\x05\x04\0\x02\0\x01\
-    \x12\x03\x05\x0b\x0f\n\x0c\n\x05\x04\0\x02\0\x03\x12\x03\x05\x12\x13\n\
-    \x0b\n\x04\x04\0\x02\x01\x12\x03\x06\x04\x12\n\x0c\n\x05\x04\0\x02\x01\
-    \x05\x12\x03\x06\x04\n\n\x0c\n\x05\x04\0\x02\x01\x01\x12\x03\x06\x0b\r\n\
-    \x0c\n\x05\x04\0\x02\x01\x03\x12\x03\x06\x10\x11\n\x0b\n\x04\x04\0\x02\
-    \x02\x12\x03\x07\x04\x16\n\x0c\n\x05\x04\0\x02\x02\x05\x12\x03\x07\x04\n\
-    \n\x0c\n\x05\x04\0\x02\x02\x01\x12\x03\x07\x0b\x11\n\x0c\n\x05\x04\0\x02\
-    \x02\x03\x12\x03\x07\x14\x15b\x06proto3\
+    \n\x16proto/response_1.proto\x12\nMyResponse\"S\n\x0fResponseMessage\x12\
+    \x18\n\x07message\x18\x01\x20\x01(\tR\x07message\x12\x12\n\x04code\x18\
+    \x02\x20\x01(\rR\x04code\x12\x12\n\x04data\x18\x03\x20\x01(\tR\x04dataJ\
+    \xd9\x01\n\x06\x12\x04\x01\0\x08\x01\n\x08\n\x01\x0c\x12\x03\x01\0\x12\n\
+    \x08\n\x01\x02\x12\x03\x02\0\x13\n\n\n\x02\x04\0\x12\x04\x04\0\x08\x01\n\
+    \n\n\x03\x04\0\x01\x12\x03\x04\x08\x17\n\x0b\n\x04\x04\0\x02\0\x12\x03\
+    \x05\x04\x17\n\x0c\n\x05\x04\0\x02\0\x05\x12\x03\x05\x04\n\n\x0c\n\x05\
+    \x04\0\x02\0\x01\x12\x03\x05\x0b\x12\n\x0c\n\x05\x04\0\x02\0\x03\x12\x03\
+    \x05\x15\x16\n\x0b\n\x04\x04\0\x02\x01\x12\x03\x06\x04\x14\n\x0c\n\x05\
+    \x04\0\x02\x01\x05\x12\x03\x06\x04\n\n\x0c\n\x05\x04\0\x02\x01\x01\x12\
+    \x03\x06\x0b\x0f\n\x0c\n\x05\x04\0\x02\x01\x03\x12\x03\x06\x12\x13\n\x0b\
+    \n\x04\x04\0\x02\x02\x12\x03\x07\x04\x14\n\x0c\n\x05\x04\0\x02\x02\x05\
+    \x12\x03\x07\x04\n\n\x0c\n\x05\x04\0\x02\x02\x01\x12\x03\x07\x0b\x0f\n\
+    \x0c\n\x05\x04\0\x02\x02\x03\x12\x03\x07\x12\x13b\x06proto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -216,7 +216,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(0);
             let mut messages = ::std::vec::Vec::with_capacity(1);
-            messages.push(RequestTran::generated_message_descriptor_data());
+            messages.push(ResponseMessage::generated_message_descriptor_data());
             let mut enums = ::std::vec::Vec::with_capacity(0);
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),
